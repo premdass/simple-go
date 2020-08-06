@@ -34,4 +34,10 @@ jobs:
       run: go build -o golangtest -v ./... 
 
     - name: Test
-      run: go test -v ./...
+      run: go test -v ./... -race -coverprofile=coverage.txt -covermode=atomic
+      
+    - uses: codecov/codecov-action@v1
+      name: Code coverage
+      with:  
+        file: coverage.txt # optional
+        fail_ci_if_error: true # optional (default = false)
